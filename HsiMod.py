@@ -2,22 +2,22 @@ import numpy as np
 import math
 from PIL import Image
 
-hsvTransform = np.array([
+hsiTransform = np.array([
 	[1/math.sqrt(2),-1/math.sqrt(2),0],
 	[1/(math.sqrt(2)*math.sqrt(3)),1/(math.sqrt(2)*math.sqrt(3)),-2/(math.sqrt(2)*math.sqrt(3))],
 	[1/math.sqrt(3),1/math.sqrt(3),1/math.sqrt(3)]])
 
-def getHsvModulationTransform(mod):
+def getHsiModulationTransform(mod):
 	(h,s,v) = mod
-	hsvModulation = np.array([
+	hsiModulation = np.array([
 		[s*math.cos(h), -s*math.sin(h),0],
 		[s*math.sin(h), s*math.cos(h),0],
 		[0,0,v]])
-	return np.linalg.inv(hsvTransform).dot(hsvModulation).dot(hsvTransform)
+	return np.linalg.inv(hsiTransform).dot(hsiModulation).dot(hsiTransform)
 
-def hsvMod(pixels,mod,annotation=True):
+def hsiMod(pixels,mod,annotation=True):
 	(h,s,v) = mod
-	transform = getHsvModulationTransform(mod)
+	transform = getHsiModulationTransform(mod)
 	if annotation:	
 		print('transform matrix:')
 		print(transform)
