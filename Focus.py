@@ -1,9 +1,6 @@
 from PIL import Image
 import numpy as np
 
-def focusSimulation(image):
-  return focusSimulationOld(image)
-
 def focusSimulation(matrix,size):
   (width,height) = size
   temp = matrix.copy()
